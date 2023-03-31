@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">QrScanner</string>
+    <string name="welcome_text">Приветствую в простом QR сканере. Чтобы начать сканирование - нажми кнопку</string>
+    <string name="scan">Начать сканирование</string>
+    <string name="result">Результат</string>
+    <string name="Ok">Ок</string>
+    <string name="open_in_browser">Открыть в браузере</string>
+    <string name="enter_data_for_encoding">Введите информацию</string>
+    <string name="generate">Генерировать</string>
+</resources>

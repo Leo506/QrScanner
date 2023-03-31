@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">QrScanner</string>
+    <string name="welcome_text">Welcome to simple qr scanner. Click the button to start scanning</string>
+    <string name="scan">Start scanning</string>
+    <string name="result">Result</string>
+    <string name="Ok">Ok</string>
+    <string name="open_in_browser">Open in browser</string>
+    <string name="enter_data_for_encoding">Enter data for encoding</string>
+    <string name="generate">Generate</string>
+</resources>
