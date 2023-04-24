@@ -13,15 +13,18 @@ import androidx.fragment.app.Fragment
 import com.example.qrscanner.databinding.FragmentGenerateBinding
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import infrastructure.EncodingRequestsRepository
+import org.koin.android.ext.android.inject
 
 class GenerateFragment : Fragment() {
 
     private lateinit var bindings: FragmentGenerateBinding
+    private val encodingRequestsRepository: EncodingRequestsRepository by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         bindings = FragmentGenerateBinding.inflate(inflater)
 
         bindings.generateButton.setOnClickListener {
@@ -36,6 +39,7 @@ class GenerateFragment : Fragment() {
                     GenerateFragment::class.simpleName,
                     "Generating new qr code for input: $input"
                 )
+                encodingRequestsRepository.saveRequest(input, this.requireContext())
                 val encoder = BarcodeEncoder()
                 val bitmap = encoder.encodeBitmap(
                     input,
@@ -55,6 +59,6 @@ class GenerateFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = GenerateFragment();
+        fun newInstance() = GenerateFragment()
     }
 }
