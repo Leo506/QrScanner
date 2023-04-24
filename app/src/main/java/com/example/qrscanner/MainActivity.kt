@@ -11,7 +11,7 @@ class MainActivity : LangActivityBase() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindings = ActivityMainBinding.inflate(layoutInflater);
+        bindings = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindings.root)
         supportActionBar?.hide()
 
@@ -27,6 +27,11 @@ class MainActivity : LangActivityBase() {
 
                 R.id.generate_page -> {
                     replaceFragment(GenerateFragment.newInstance())
+                    true
+                }
+
+                R.id.history_page -> {
+                    replaceFragment(EncodingHistoryFragment.newInstance())
                     true
                 }
 

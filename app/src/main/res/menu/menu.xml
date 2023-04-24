@@ -11,4 +11,9 @@
         android:enabled="true"
         android:title="Generate"/>
 
+    <item
+        android:id="@+id/history_page"
+        android:enabled="true"
+        android:title="History"/>
+
 </menu>

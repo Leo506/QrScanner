@@ -9,4 +9,5 @@
     <string name="generate">Генерировать</string>
     <string name="error">Ошибка</string>
     <string name="input_can_not_be_empty">Поле ввода не может быть пустым</string>
+    <string name="history">История</string>
 </resources>

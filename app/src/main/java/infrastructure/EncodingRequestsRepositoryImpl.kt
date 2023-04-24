@@ -10,7 +10,9 @@ class EncodingRequestsRepositoryImpl : EncodingRequestsRepository {
         dataFile.appendText(request + '\n')
     }
 
-    override fun getAllRequests(context: Context): Array<String> {
-        TODO("Not yet implemented")
+    override fun getAllRequests(context: Context): List<String> {
+        val path = context.filesDir
+        val dataFile = File(path, "data.txt")
+        return dataFile.readLines()
     }
 }
