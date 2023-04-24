@@ -7,4 +7,6 @@
     <string name="open_in_browser">Open in browser</string>
     <string name="enter_data_for_encoding">Enter data for encoding</string>
     <string name="generate">Generate</string>
+    <string name="error">Error</string>
+    <string name="input_can_not_be_empty">Input can not be empty</string>
 </resources>

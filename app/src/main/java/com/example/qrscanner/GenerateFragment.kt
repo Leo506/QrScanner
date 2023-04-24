@@ -2,6 +2,7 @@ package com.example.qrscanner
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,31 +31,47 @@ class GenerateFragment : Fragment() {
         bindings.generateButton.setOnClickListener {
             val input = bindings.contentInput.text.toString()
             if  (input.isEmpty()) {
-                AlertDialog.Builder(this@GenerateFragment.requireContext()).apply {
-                    setTitle("Error")
-                    setMessage("Input can not be empty")
-                }.show()
+                showEmptyInputAlert()
             } else {
                 Log.i(
                     GenerateFragment::class.simpleName,
                     "Generating new qr code for input: $input"
                 )
                 encodingRequestsRepository.saveRequest(input, this.requireContext())
-                val encoder = BarcodeEncoder()
-                val bitmap = encoder.encodeBitmap(
-                    input,
-                    BarcodeFormat.QR_CODE, bindings.qrCodeImage.width, bindings.qrCodeImage.height
-                )
-                bindings.qrCodeImage.setImageBitmap(bitmap)
-                bindings.qrCodeImage.visibility = VISIBLE
+                val bitmap = encode(input)
+                setQrImage(bitmap)
 
-                val inputManager =
-                    requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
+                hideKeyboard()
             }
         }
 
         return bindings.root
+    }
+
+    private fun showEmptyInputAlert() {
+        AlertDialog.Builder(this@GenerateFragment.requireContext()).apply {
+            setTitle(getString(R.string.error))
+            setMessage(R.string.input_can_not_be_empty)
+        }.show()
+    }
+
+    private fun encode(input: String): Bitmap? {
+        val encoder = BarcodeEncoder()
+        return encoder.encodeBitmap(
+            input,
+            BarcodeFormat.QR_CODE, bindings.qrCodeImage.width, bindings.qrCodeImage.height
+        )
+    }
+
+    private fun setQrImage(bitmap: Bitmap?) {
+        bindings.qrCodeImage.setImageBitmap(bitmap)
+        bindings.qrCodeImage.visibility = VISIBLE
+    }
+
+    private fun hideKeyboard() {
+        val inputManager =
+            requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
     }
 
     companion object {
