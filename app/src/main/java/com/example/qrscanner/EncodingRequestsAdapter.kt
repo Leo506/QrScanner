@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import models.EncodingRequest
+import java.text.SimpleDateFormat
 
 class EncodingRequestsAdapter(private val context: Activity, private val requests: List<EncodingRequest>)
     : ArrayAdapter<EncodingRequest>(context, R.layout.simple_list_item, requests) {
@@ -18,7 +19,7 @@ class EncodingRequestsAdapter(private val context: Activity, private val request
         request.text = requests[position].requestText
 
         val requestDate = rowView.findViewById<TextView>(R.id.request_date)
-        requestDate.text = requests[position].requestDate.toString()
+        requestDate.text = SimpleDateFormat("HH:mm dd-MM-yyyy").format(requests[position].requestDate)
 
         return rowView
     }
