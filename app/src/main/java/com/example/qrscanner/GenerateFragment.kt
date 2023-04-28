@@ -37,7 +37,7 @@ class GenerateFragment : Fragment() {
                     GenerateFragment::class.simpleName,
                     "Generating new qr code for input: $input"
                 )
-                encodingRequestsRepository.saveRequest(input, this.requireContext())
+                encodingRequestsRepository.saveRequest(input)
                 val bitmap = encode(input)
                 setQrImage(bitmap)
 

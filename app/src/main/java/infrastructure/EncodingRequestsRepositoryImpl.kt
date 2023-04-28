@@ -1,18 +1,20 @@
 package infrastructure
 
-import android.content.Context
-import java.io.File
+import dataAccess.EncodingRequestsDao
+import models.EncodingRequest
+import java.sql.Date
+import java.time.LocalDateTime
+import java.time.ZoneId
 
-class EncodingRequestsRepositoryImpl(private val context: Context) : EncodingRequestsRepository {
-    override fun saveRequest(request: String, context: Context) {
-        val path = context.filesDir
-        val dataFile = File(path, "data.txt")
-        dataFile.appendText(request + '\n')
+class EncodingRequestsRepositoryImpl(private val requestsDao: EncodingRequestsDao) : EncodingRequestsRepository {
+    override fun saveRequest(request: String) {
+        val addDate = Date.from(
+            LocalDateTime.now()
+                .atZone(ZoneId.systemDefault())
+                .toInstant()
+        )
+        requestsDao.create(EncodingRequest(0, request, addDate))
     }
 
-    override fun getAllRequests(): List<String> {
-        val path = context.filesDir
-        val dataFile = File(path, "data.txt")
-        return dataFile.readLines()
-    }
+    override fun getAllRequests(): List<EncodingRequest> = requestsDao.getAll()
 }

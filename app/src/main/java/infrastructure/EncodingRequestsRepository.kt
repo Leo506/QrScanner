@@ -1,9 +1,9 @@
 package infrastructure
 
-import android.content.Context
+import models.EncodingRequest
 
 interface EncodingRequestsRepository {
-    fun saveRequest(request: String, context: Context)
+    fun saveRequest(request: String)
 
-    fun getAllRequests(): List<String>
+    fun getAllRequests(): List<EncodingRequest>
 }
