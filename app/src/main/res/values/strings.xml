@@ -10,4 +10,5 @@
     <string name="error">Error</string>
     <string name="input_can_not_be_empty">Input can not be empty</string>
     <string name="history">History</string>
+    <string name="delete_request">Удалить запрос</string>
 </resources>

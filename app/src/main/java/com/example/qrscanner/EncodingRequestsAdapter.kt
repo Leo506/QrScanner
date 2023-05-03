@@ -23,5 +23,4 @@ class EncodingRequestsAdapter(private val context: Activity, private val request
 
         return rowView
     }
-
 }
