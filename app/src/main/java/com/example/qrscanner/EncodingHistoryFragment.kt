@@ -1,8 +1,8 @@
 package com.example.qrscanner
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
+import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.qrscanner.databinding.FragmentEncodingHistoryBinding
 import models.EncodingRequest
@@ -31,16 +31,24 @@ class EncodingHistoryFragment : Fragment() {
             binding.requestsList.adapter = EncodingRequestsAdapter(requireActivity(), it)
         }
 
+        binding.requestsList.choiceMode = ListView.CHOICE_MODE_SINGLE
         binding.requestsList.setOnItemLongClickListener { adapterView, _, position, _ ->
 
             when (val selectedItem = adapterView.adapter.getItem(position)) {
                 is EncodingRequest -> {
+                    binding.requestsList.clearFocus()
+                    binding.requestsList.requestFocusFromTouch()
+                    binding.requestsList.requestFocus()
+                    binding.requestsList.setItemChecked(position, true)
                     showActionMode(selectedItem.requestText, selectedItem.requestDate.toLongDateString())
                     true
                 }
                 else -> false
             }
         }
+
+        binding.requestsList.setOnItemClickListener { _, _, _, _ -> actionMode?.finish() }
+
         return binding.root
     }
 
@@ -57,9 +65,11 @@ class EncodingHistoryFragment : Fragment() {
                 }
 
                 override fun onActionItemClicked(mode: ActionMode?, menuItem: MenuItem?): Boolean {
-                    val selectedItem = binding.requestsList.selectedItem
-                    if (selectedItem is EncodingRequest)
-                        Log.i("SelectedItem", "Item: ${selectedItem.requestText}")
+                    val position = binding.requestsList.checkedItemPosition
+                    val selectedItem = binding.requestsList.adapter.getItem(position)
+                    if (selectedItem is EncodingRequest && menuItem?.itemId == R.id.delete_request) {
+                        vm.deleteRequest(selectedItem)
+                    }
                     mode?.finish()
                     return false
                 }

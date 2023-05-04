@@ -17,4 +17,5 @@ class EncodingRequestsRepositoryImpl(private val requestsDao: EncodingRequestsDa
     }
 
     override fun getAllRequests(): List<EncodingRequest> = requestsDao.getAll()
+    override fun delete(request: EncodingRequest) = requestsDao.delete(request)
 }

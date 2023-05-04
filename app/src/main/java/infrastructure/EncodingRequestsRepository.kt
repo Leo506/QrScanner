@@ -6,4 +6,5 @@ interface EncodingRequestsRepository {
     fun saveRequest(request: String)
 
     fun getAllRequests(): List<EncodingRequest>
+    fun delete(request: EncodingRequest)
 }

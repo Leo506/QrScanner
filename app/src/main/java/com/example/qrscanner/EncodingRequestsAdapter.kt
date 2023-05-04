@@ -22,4 +22,6 @@ class EncodingRequestsAdapter(private val context: Activity, private val request
 
         return rowView
     }
+
+    override fun getItem(position: Int): EncodingRequest = requests[position]
 }

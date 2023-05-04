@@ -1,6 +1,7 @@
 package dataAccess
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import models.EncodingRequest
@@ -12,4 +13,7 @@ interface EncodingRequestsDao {
 
     @Insert
     fun create(request:EncodingRequest)
+
+    @Delete
+    fun delete(request: EncodingRequest)
 }
